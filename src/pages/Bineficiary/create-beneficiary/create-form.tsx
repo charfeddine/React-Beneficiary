@@ -68,7 +68,7 @@ export const CreateForm = (props: BeneficiaryFormProps) => {
       }
     }
     fetchData();
-  }, [beneficiaryService, props.beneficiaryId]);
+  }, [props.beneficiaryId]);
   function getValueByKey(enumObj: any, key: string): string | undefined {
     return enumObj[key];
   }
