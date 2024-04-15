@@ -11,7 +11,8 @@ import { useBeneficiaryService } from "../../../services/beneficiaryService";
 import { v4 as uuidv4 } from "uuid";
 import { auth } from "../../../config/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useAsyncEffect } from "../../../hooks/async-effect.hook";
 
 interface BeneficiaryFormProps {
   beneficiaryId?: string;
@@ -50,24 +51,26 @@ export const CreateForm = (props: BeneficiaryFormProps) => {
     null
   );
 
-  useEffect(() => {
-    async function fetchData() {
-      if (props.beneficiaryId) {
-        const dummyBeneficiary: Beneficiary =
-          await beneficiaryService.getBeneficiary(props.beneficiaryId);
-        setFormData(dummyBeneficiary);
+  useAsyncEffect(async () => {
+    if (props.beneficiaryId) {
+      const dummyBeneficiary: Beneficiary =
+        await beneficiaryService.getBeneficiary(props.beneficiaryId);
+      setFormData(dummyBeneficiary);
 
-        const countryValue = getValueByKey(
-          Countries,
-          dummyBeneficiary.address.country.toString()
-        );
-        setSelectedCountryCode(countryValue || "");
-      } else {
-        setFormData(initialeBeneficiary);
-      }
+      const countryValue = getValueByKey(
+        Countries,
+        dummyBeneficiary.address.country.toString()
+      );
+      setSelectedCountryCode(countryValue || "");
+    } else {
+      setFormData(initialeBeneficiary);
     }
-    fetchData();
-  }, [props.beneficiaryId]);
+  }, []);
+
+  // useEffect(() => {
+  //   fetchData();
+  // }, [props.beneficiaryId]);
+
   function getValueByKey(enumObj: any, key: string): string | undefined {
     return enumObj[key];
   }

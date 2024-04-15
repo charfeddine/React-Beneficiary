@@ -1,20 +1,19 @@
 import { PencilSquare, Trash } from "react-bootstrap-icons";
 import { Beneficiary as IBeneficiary } from "../../../models/Beneficiary";
 import { Button } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
 interface Props {
   beneficiary: IBeneficiary;
   index: number;
+  updateBeneficiary: any;
   deleteBeneficiary: any;
 }
 
-export const BeneficiaryItem = (props: Props) => {
-  const { beneficiary, index } = props;
-  const navigate = useNavigate();
-
-  function handleUpdate(id: string): void {
-    navigate(`/edit-beneficiary/${id}`);
-  }
+export const BeneficiaryItem = ({
+  beneficiary,
+  index,
+  updateBeneficiary,
+  deleteBeneficiary,
+}: Props) => {
   return (
     <tr key={index}>
       <td>{index + 1}</td>
@@ -26,11 +25,14 @@ export const BeneficiaryItem = (props: Props) => {
       <td>
         <Button
           variant="danger"
-          onClick={() => props.deleteBeneficiary(beneficiary.id)}
+          onClick={() => deleteBeneficiary(beneficiary.id)}
         >
           <Trash />
         </Button>{" "}
-        <Button variant="primary" onClick={() => handleUpdate(beneficiary.id)}>
+        <Button
+          variant="primary"
+          onClick={() => updateBeneficiary(beneficiary.id)}
+        >
           <PencilSquare />
         </Button>
       </td>

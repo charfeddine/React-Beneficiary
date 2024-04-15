@@ -48,6 +48,9 @@ export const ListBeneficiaries = () => {
       }
     }
   };
+  const handleUpdate = async (id: string) => {
+    navigate(`/edit-beneficiary/${id}`);
+  };
 
   return (
     <div>
@@ -62,6 +65,7 @@ export const ListBeneficiaries = () => {
             Add Bineficiary
           </button>
         </div>
+
         <Table striped bordered hover>
           <thead>
             <tr>
@@ -80,6 +84,7 @@ export const ListBeneficiaries = () => {
               <BeneficiaryItem
                 beneficiary={item}
                 index={index}
+                updateBeneficiary={handleUpdate}
                 deleteBeneficiary={handleDelete}
               />
             ))}

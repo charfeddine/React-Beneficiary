@@ -18,6 +18,7 @@ export const Home = () => {
     <div className="HOME">
       <h1>
         <p> THIS IS HOME PAGE :{username}</p>
+        {/* <Dashboard /> */}
       </h1>
     </div>
   );

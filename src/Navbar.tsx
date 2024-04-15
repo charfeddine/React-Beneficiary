@@ -53,17 +53,6 @@ export const Navbar = () => {
                     Home <span className="sr-only">(current)</span>
                   </Link>
                 </li>
-                {/* <li className="nav-item">
-                  <Link className="nav-link" to="/login">
-                    Login
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link" to="/signIn">
-                    SignIn
-                  </Link>
-                </li> */}
-
                 <li className="nav-item">
                   <Link className="nav-link" to="/list-beneficiary">
                     List Beneficiaries
@@ -77,6 +66,11 @@ export const Navbar = () => {
                 <li className="nav-item">
                   <Link className="nav-link" to="/person">
                     Person
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/dashboard">
+                    Dashboard
                   </Link>
                 </li>
               </ul>
