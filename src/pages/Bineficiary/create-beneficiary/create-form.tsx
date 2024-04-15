@@ -40,10 +40,9 @@ const initialeBeneficiary: Beneficiary = {
 export const CreateForm = (props: BeneficiaryFormProps) => {
   const [user] = useAuthState(auth);
   const navigate = useNavigate();
-
   const beneficiaryService = useBeneficiaryService();
-  const [formData, setFormData] = useState<Beneficiary>(initialeBeneficiary);
 
+  const [formData, setFormData] = useState<Beneficiary>(initialeBeneficiary);
   const [selectedCountry, setSelectedCountry] = useState<Countries | null>(
     null
   );
@@ -68,7 +67,7 @@ export const CreateForm = (props: BeneficiaryFormProps) => {
       }
     }
     fetchData();
-  }, [beneficiaryService, props.beneficiaryId]);
+  }, [props.beneficiaryId]);
   function getValueByKey(enumObj: any, key: string): string | undefined {
     return enumObj[key];
   }
@@ -144,7 +143,7 @@ export const CreateForm = (props: BeneficiaryFormProps) => {
     const selectedCountryValue = event.target.value as Countries;
     setSelectedCountryCode(selectedCountryValue);
   };
-  const handleChange = (event: any) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
 
     setFormData({
@@ -152,7 +151,6 @@ export const CreateForm = (props: BeneficiaryFormProps) => {
       [name]: value,
     });
   };
-
   const handleAddressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prevBeneficiary) => ({
@@ -186,7 +184,7 @@ export const CreateForm = (props: BeneficiaryFormProps) => {
             placeholder=""
             required
             {...register("nickName")}
-            value={formData.nickName || ""}
+            value={formData?.nickName}
             onChange={handleChange}
           />
 
